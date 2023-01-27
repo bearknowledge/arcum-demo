@@ -8,8 +8,8 @@ const options = {
         y: {
             ticks: {
                 // Include a dollar sign in the ticks
-                callback: function (value) {
-                    return abbreviate(1400000, {
+                callback: function (value, index, ticks) {
+                    return abbreviate(value, {
                         style: "currency",
                         currency: "USD",
                         maximumFractionDigits: 0,

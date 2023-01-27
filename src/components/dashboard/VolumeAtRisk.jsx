@@ -5,7 +5,7 @@ const VolumeAtRisk = ({ currMonth, prevMonth }) => {
     return (
         <StatsCard
             title="Volume at risk"
-            stat={abbreviate(currMonth)}
+            stat={abbreviate(14000000)}
             percentDecimal={(currMonth - prevMonth) / prevMonth}
         />
     );
