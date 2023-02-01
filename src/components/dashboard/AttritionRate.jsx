@@ -4,7 +4,7 @@ const AttritionRate = ({ currMonth, prevMonth }) => {
     return (
         <StatsCard
             title="Attrition rate"
-            stat={`${currMonth * 100}%`}
+            stat={`${(currMonth * 100).toFixed(2)}%`}
             percentDecimal={(currMonth - prevMonth) / prevMonth}
         />
     );

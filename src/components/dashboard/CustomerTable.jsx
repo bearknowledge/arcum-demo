@@ -353,7 +353,7 @@ const CustomerTable = (props) => {
                                                             color={
                                                                 riskMap[
                                                                     singleCustomer
-                                                                        .risk
+                                                                        .risk.toUpperCase()
                                                                 ]
                                                             }
                                                         >
