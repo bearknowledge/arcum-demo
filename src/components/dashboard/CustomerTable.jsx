@@ -234,12 +234,13 @@ const CustomerTable = (props) => {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={"LOW"}>Low</MenuItem>
-                  <MenuItem value={"MEDIUM"}>Medium</MenuItem>
-                  <MenuItem value={"HIGH"}>High</MenuItem>
+                  <MenuItem value={"low"}>Low</MenuItem>
+                  <MenuItem value={"medium"}>Medium</MenuItem>
+                  <MenuItem value={"high"}>High</MenuItem>
                 </Select>
               </FormControl>
             </Hidden>
+
             <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="reason-filter-label">Reason</InputLabel>
               <Select
