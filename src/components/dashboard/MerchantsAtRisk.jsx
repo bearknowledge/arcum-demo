@@ -4,7 +4,7 @@ const MerchantsAtRisk = ({ currMonth, prevMonth }) => {
     return (
         <StatsCard
             title="Merchants at risk"
-            stat={currMonth}
+            stat={54}
             percentDecimal={(currMonth - prevMonth) / prevMonth}
         />
     );
