@@ -235,9 +235,9 @@ const CustomerTable = (props) => {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={"low"}>Low</MenuItem>
-                  <MenuItem value={"medium"}>Medium</MenuItem>
-                  <MenuItem value={"high"}>High</MenuItem>
+                  <MenuItem value={"LOW"}>Low</MenuItem>
+                  <MenuItem value={"MEDIUM"}>Medium</MenuItem>
+                  <MenuItem value={"HIGH"}>High</MenuItem>
                 </Select>
               </FormControl>
             </Hidden>
