@@ -160,6 +160,7 @@ const CustomerTable = (props) => {
     // Risk filtering
     if (riskFilter !== "") {
       filteredCustomers = filteredCustomers.filter((rowValue) => {
+        console.log(rowValue.risk)
         return rowValue.risk.toUpperCase() === riskFilter;
       });
     }
