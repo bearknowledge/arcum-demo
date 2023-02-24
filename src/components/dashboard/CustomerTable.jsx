@@ -71,7 +71,7 @@ function getComparator(order, orderBy) {
 }
 
 function descendingComparator(a, b, orderBy) {
-  console.log(b[orderBy], a[orderBy])
+  console.log(b, a)
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -151,7 +151,6 @@ const CustomerTable = (props) => {
           .includes(searchText.toLowerCase());
       });
     }
-
     setRows(filteredCustomers);
   }, [searchText]);
 
