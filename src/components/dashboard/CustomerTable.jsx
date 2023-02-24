@@ -71,6 +71,7 @@ function getComparator(order, orderBy) {
 }
 
 function descendingComparator(a, b, orderBy) {
+  console.log(b[orderBy], a[orderBy])
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
