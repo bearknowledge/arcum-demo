@@ -9,7 +9,7 @@ import NumberOfMerchants from "../components/dashboard/NumberOfMerchants";
 import TotalTransactions from "../components/dashboard/TotalTransactions";
 import CustomerTable from "src/components/dashboard/CustomerTable";
 import { DashboardLayout } from "../components/dashboard-layout";
-import ProtectedRoute from "src/components/ProtectedRoute";
+import PropTypes from 'prop-types'
 import TotalVolume from "src/components/dashboard/TotalVolume";
 import { useContext, useEffect, useState } from "react";
 import Lottie from "lottie-react";

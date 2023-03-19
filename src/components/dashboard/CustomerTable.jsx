@@ -32,7 +32,6 @@ import { useAuth } from "../../contexts/AuthUserContext";
 
 const columns = [
   "Name",
-  "DBA",
   "MID",
   "Term Date",
   "MCC",
@@ -41,12 +40,13 @@ const columns = [
   "Revenue",
   "Risk",
   "Reason",
- 
+  "Suggestion",
+  "Action",
 ];
 
 const dbColumnMap = {
   Name: "name",
-  DBA:"dba",
+  DBA: "dba",
   MID: "merchant_id",
   "Term Date": "term_date",
   MCC: "mcc",
@@ -55,7 +55,7 @@ const dbColumnMap = {
   Revenue: "revenue",
   Risk: "risk",
   Reason: "reason",
- 
+  Action: "action",
 };
 
 const riskMap = {
@@ -74,7 +74,7 @@ const ExportButton = styled(Button)({
   textDecoration: "none",
 });
 
- function getComparator(order, orderBy) {
+function getComparator(order, orderBy) {
   return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
@@ -82,11 +82,9 @@ const ExportButton = styled(Button)({
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
- 
     return -1;
   }
   if (b[orderBy] > a[orderBy]) {
-
     return 1;
   }
   return 0;
@@ -142,12 +140,11 @@ const CustomerTable = ({ update, month, office }) => {
     setPage(0);
   };
 
-  const handleSort = (property) => {  
+  const handleSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc": "asc" );
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-  }
-
+  };
 
   const handleSearchText = useCallback(() => {
     let filteredCustomers = merchants;
@@ -166,16 +163,15 @@ const CustomerTable = ({ update, month, office }) => {
   }, [searchText]);
 
   const updateCheck = (index) => {
-  console.log(index, document.getElementById(index).checked )
- if (document.getElementById(index).checked === true) {
-    document.getElementById(index).removeAttribute('checked')
-  }
+    console.log(index, document.getElementById(index).checked);
+    if (document.getElementById(index).checked === true) {
+      document.getElementById(index).removeAttribute("checked");
+    }
 
-  if (document.getElementById(index).checked === false) {
-    document.getElementById(index).setAttribute('checked', 'checked')
-  }
- }
-
+    if (document.getElementById(index).checked === false) {
+      document.getElementById(index).setAttribute("checked", "checked");
+    }
+  };
 
   const filterRows = useCallback(() => {
     let filteredCustomers = merchants;
@@ -194,17 +190,16 @@ const CustomerTable = ({ update, month, office }) => {
       });
     }
 
-       // Reason filtering
-       if (contactedFilter !== "") {
-        filteredCustomers = filteredCustomers.filter((rowValue) => {
-          console.log(rowValue.contacted)
-          return rowValue.contacted === contactedFilter;
-        });
-      }
-  
+    // Reason filtering
+    if (contactedFilter !== "") {
+      filteredCustomers = filteredCustomers.filter((rowValue) => {
+        console.log(rowValue.contacted);
+        return rowValue.contacted === contactedFilter;
+      });
+    }
 
     setRows(filteredCustomers);
-    console.log(filteredCustomers)
+    console.log(filteredCustomers);
   }, [riskFilter, reasonFilter, contactedFilter]);
 
   function resolveAndDownloadBlob(response) {
@@ -237,12 +232,8 @@ const CustomerTable = ({ update, month, office }) => {
     filterRows();
   }, [filterRows]);
 
-  
-  useEffect(() => {
-  }, [orderBy]);
+  useEffect(() => {}, [orderBy]);
 
-
- 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - merchants.length) : 0;
@@ -347,36 +338,36 @@ const CustomerTable = ({ update, month, office }) => {
                   <MenuItem value={false}> Uncontacted</MenuItem>
                 </Select>
               </FormControl> */}
-            <FormControl
-                            variant="outlined"
-                            sx={{ m: 1, minWidth: 120 }}
-                        >
-                            <InputLabel id="reason-filter-label">
-                                Reason
-                            </InputLabel>
-                            <Select
-                                labelId="reason-filter-label"
-                                id="reason-filter"
-                                value={reasonFilter}
-                                onChange={(e) =>
-                                    setReasonFilter(e.target.value)
-                                }
-                                onFocus={async () => await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/filterByReason?company=${authUser.companyId}`).then((res) => {
-                                  if (res.data.error) {
-                                      console.log(res.data.error);
-                                  }})}
-                                label="Reason"
-                            >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                <MenuItem value={"SERVICE"}>Service</MenuItem>
-                                <MenuItem value={"ECONOMY"}>Economy</MenuItem>
-                                <MenuItem value={"AGENT"}>Agent</MenuItem>
-                                <MenuItem value={"PRODUCT"}>Product</MenuItem>
-                                <MenuItem value={"PRICING"}>Pricing</MenuItem>
-                            </Select>
-                        </FormControl>
+            <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }}>
+              <InputLabel id="reason-filter-label">Reason</InputLabel>
+              <Select
+                labelId="reason-filter-label"
+                id="reason-filter"
+                value={reasonFilter}
+                onChange={(e) => setReasonFilter(e.target.value)}
+                onFocus={async () =>
+                  await axios
+                    .get(
+                      `${process.env.NEXT_PUBLIC_API_URL}/filterByReason?company=${authUser.companyId}`
+                    )
+                    .then((res) => {
+                      if (res.data.error) {
+                        console.log(res.data.error);
+                      }
+                    })
+                }
+                label="Reason"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"SERVICE"}>Service</MenuItem>
+                <MenuItem value={"ECONOMY"}>Economy</MenuItem>
+                <MenuItem value={"AGENT"}>Agent</MenuItem>
+                <MenuItem value={"PRODUCT"}>Product</MenuItem>
+                <MenuItem value={"PRICING"}>Pricing</MenuItem>
+              </Select>
+            </FormControl>
             <Box sx={{ m: 1 }}>
               <a onClick={() => exportFunction()}>
                 <ExportButton startIcon={<FileDownloadIcon />}>
@@ -390,12 +381,12 @@ const CustomerTable = ({ update, month, office }) => {
           <Card {...month}>
             <PerfectScrollbar>
               <TableContainer sx={{ minWidth: 800, maxHeight: 550 }}>
-                <Table stickyHeader key={order} >
+                <Table stickyHeader key={order}>
                   <TableHead>
                     <TableRow>
                       {columns.map((columnName) => (
                         <TableCell
-                        align={columnName === "Contacted" ? "center" : "left"}
+                          align={columnName === "Contacted" ? "center" : "left"}
                           sortDirection="desc"
                           key={dbColumnMap[columnName]}
                         >
@@ -410,9 +401,9 @@ const CustomerTable = ({ update, month, office }) => {
                                   ? order
                                   : "asc"
                               }
-                              onClick={() => handleSort(
-                                dbColumnMap[columnName]
-                              )}
+                              onClick={() =>
+                                handleSort(dbColumnMap[columnName])
+                              }
                             >
                               {columnName}
                             </TableSortLabel>
@@ -423,8 +414,8 @@ const CustomerTable = ({ update, month, office }) => {
                   </TableHead>
                   <TableBody>
                     {rows
-                    .slice()
-                    .sort(getComparator(order, orderBy))
+                      .slice()
+                      .sort(getComparator(order, orderBy))
                       .slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
@@ -439,8 +430,8 @@ const CustomerTable = ({ update, month, office }) => {
                         const day = "01";
                         const join = [year, fetchMonth, day].join("-");
                         return (
-                          <TableRow hover key={singleCustomer.merchant_id} >
-                              {/* {singleCustomer.contacted === true ?
+                          <TableRow hover key={singleCustomer.merchant_id}>
+                            {/* {singleCustomer.contacted === true ?
 
                               <TableCell align="center" padding="checkbox" >
                               <input type="checkbox" id={index.toString}
@@ -449,16 +440,19 @@ const CustomerTable = ({ update, month, office }) => {
                               <input type="checkbox" id={index.toString}
                               /></TableCell> */}
 
-                             <TableCell>{singleCustomer.name}</TableCell>
+                            <TableCell>{singleCustomer.name}</TableCell>
 
-                             <TableCell>
-                                                      {singleCustomer.dba  === undefined || singleCustomer.dba === null? "N/A": singleCustomer.dba }
-                                                    </TableCell>
+                            <TableCell>
+                              {singleCustomer.dba === undefined ||
+                              singleCustomer.dba === null
+                                ? "N/A"
+                                : singleCustomer.dba}
+                            </TableCell>
                             <TableCell>{singleCustomer.merchant_id}</TableCell>
                             <TableCell>{join}</TableCell>
 
                             <TableCell>{singleCustomer.mcc}</TableCell>
-                           
+
                             <TableCell>{singleCustomer.tenure_years}</TableCell>
                             <TableCell>
                               {numFormatter.format(singleCustomer.volume)}
@@ -476,12 +470,55 @@ const CustomerTable = ({ update, month, office }) => {
                               </SeverityPill>
                             </TableCell>
                             <TableCell>
-                                                        {singleCustomer?.reason?.toUpperCase() === undefined ? "N/A": singleCustomer?.reason?.toUpperCase() }
-                                                    </TableCell>
-
-
+                              {singleCustomer?.reason?.toUpperCase() ===
+                              undefined
+                                ? "N/A"
+                                : singleCustomer?.reason?.toUpperCase()}
+                            </TableCell>
+                            <TableCell>
+                              Suggestion
+                            </TableCell>
+                            <TableCell>
+                              <FormControl
+                                variant="outlined"
+                                sx={{ m: 1, minWidth: 120 }}
+                              >
+                                <Select
+                                  labelId="action-label"
+                                  id="action-tabs"
+                                  // value={riskFilter}
+                                  // onChange={(e) => setRiskFilter(e.target.value)}
+                                  label="Action"
+                                >
+                                  <MenuItem value="">
+                                    <em>None</em>
+                                  </MenuItem>
+                                  <MenuItem value={"Email"}>Email</MenuItem>
+                                  <MenuItem value={"Call"}>Call</MenuItem>
+                                  <MenuItem value={"Send_Agent"}>
+                                    Send Agent
+                                  </MenuItem>
+                                  <MenuItem value={"New_POS"}>
+                                    {" "}
+                                    New POS
+                                  </MenuItem>
+                                  <MenuItem value={"Lower_rate"}>
+                                    Lower rate
+                                  </MenuItem>
+                                  <MenuItem value={"Surcharge/CD"}>
+                                    Surcharge/CD
+                                  </MenuItem>
+                                  <MenuItem value={"CB_mitigation"}>
+                                    CB mitigation
+                                  </MenuItem>
+                                  <MenuItem value={"Other"}>
+                                    Other (input action)
+                                  </MenuItem>
+                                </Select>
+                              </FormControl>
+                            </TableCell>
                           </TableRow>
-                        )
+                        );
                       })}
                     {emptyRows > 0 && (
                       <TableRow
