@@ -441,12 +441,7 @@ const CustomerTable = ({ update, month, office }) => {
 
                             <TableCell>{singleCustomer.name}</TableCell>
 
-                            <TableCell>
-                              {singleCustomer.dba === undefined ||
-                              singleCustomer.dba === null
-                                ? "N/A"
-                                : singleCustomer.dba}
-                            </TableCell>
+                         
                             <TableCell>{singleCustomer.merchant_id}</TableCell>
                             <TableCell>{join}</TableCell>
 
