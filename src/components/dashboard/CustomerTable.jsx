@@ -46,7 +46,6 @@ const columns = [
 
 const dbColumnMap = {
   Name: "name",
-  DBA: "dba",
   MID: "merchant_id",
   "Term Date": "term_date",
   MCC: "mcc",
@@ -483,6 +482,7 @@ const CustomerTable = ({ update, month, office }) => {
                                 variant="outlined"
                                 sx={{ m: 1, minWidth: 120 }}
                               >
+                                   <InputLabel id="action-label">Action</InputLabel>
                                 <Select
                                   labelId="action-label"
                                   id="action-tabs"
