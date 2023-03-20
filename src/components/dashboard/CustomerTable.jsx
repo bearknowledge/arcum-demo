@@ -427,7 +427,7 @@ const CustomerTable = ({ update, month, office }) => {
                             ? "0" + (term.getUTCMonth() + 1)
                             : term.getUTCMonth() + 1;
                         const day = "01";
-                        const join = [year, fetchMonth, day].join("-");
+                        const join = [year, fetchMonth].join("-");
                         return (
                           <TableRow hover key={singleCustomer.merchant_id}>
                             {/* {singleCustomer.contacted === true ?
