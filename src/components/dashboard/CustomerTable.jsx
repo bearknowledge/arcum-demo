@@ -470,7 +470,7 @@ const CustomerTable = ({ update, month, office }) => {
                                 : singleCustomer?.reason?.toUpperCase()}
                             </TableCell>
                             <TableCell>
-                              Suggestion
+                              {singleCustomer.suggested}
                             </TableCell>
                             <TableCell>
                               <FormControl
