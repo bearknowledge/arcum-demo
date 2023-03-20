@@ -208,48 +208,7 @@ export const DashboardSidebar = (props) => {
                 onClick={handleClose}
               />
             ))}
-            <Button
-              id="fade-button"
-              aria-controls={openMenu ? "fade-menu" : undefined}
-              aria-haspopup="true"
-              startIcon=<BusinessIcon fontSize="small" />
-              aria-expanded={openMenu ? "true" : undefined}
-              onClick={handleClick}
-              sx={{
-                backgroundColor: "primary.main",
-                borderRadius: 1,
-                color: "primary.contrastText",
-                fontWeight: "fontWeightBold",
-                justifyContent: "flex-start",
-                px: 3,
-                textAlign: "left",
-                textTransform: "none",
-                width: "100%",
-                "& .MuiButton-startIcon": {
-                  color: "primary.contrastText",
-                },
-                "&:hover": {
-                  backgroundColor: "gray",
-                },
-              }}
-            >
-              My Offices
-            </Button>
-            <Menu
-              id="fade-menu"
-              MenuListProps={{
-                "aria-labelledby": "fade-button",
-              }}
-              anchorEl={anchorEl}
-              open={openMenu}
-              onClose={handleClose}
-              TransitionComponent={Fade}
-            >
-              {offices.map((item) => (
-                 offices?.length === 0 ? <></> :
-                <MenuItem onClick={handleClose}>{item}</MenuItem>
-              ))}
-            </Menu>
+         
           </Box>
         </Box>
         <Box
