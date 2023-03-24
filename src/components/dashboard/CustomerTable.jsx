@@ -238,7 +238,7 @@ const CustomerTable = ({ update, month, office }) => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - merchants.length) : 0;
 
     const setHighlight = (index) => {
-      document.getElementById(index).setAttribute("style","background-color:gray")
+      document.getElementById(index).setAttribute("style","background-color:lightGray")
 
     }
 
