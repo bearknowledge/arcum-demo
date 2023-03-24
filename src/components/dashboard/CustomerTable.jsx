@@ -467,7 +467,7 @@ const CustomerTable = ({ update, month, office }) => {
 
                          
                             <TableCell>
-                              <a style={{textDecoration:"underline"}} id={index + "mid"} onClick={() => copy(index + "mid")}> {singleCustomer.merchant_id}</a>
+                              <button style={{textDecoration:"underline", backgroundColor:"transparent", padding:"0px"}} id={index + "mid"} onClick={() => copy(index + "mid")}> {singleCustomer.merchant_id}</button>
                               </TableCell>
                             <TableCell>{join}</TableCell>
 
