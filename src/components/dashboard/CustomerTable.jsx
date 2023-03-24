@@ -467,7 +467,7 @@ const CustomerTable = ({ update, month, office }) => {
 
                          
                             <TableCell>
-                              <a type="text/html" id={index + "mid"} onClick={() => copy(index + "mid")}> {singleCustomer.merchant_id}</a>
+                              <a id={index + "mid"} onClick={() => copy(index + "mid")}> {singleCustomer.merchant_id}</a>
                               </TableCell>
                             <TableCell>{join}</TableCell>
 
