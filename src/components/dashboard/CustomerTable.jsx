@@ -244,7 +244,7 @@ const CustomerTable = ({ update, month, office }) => {
 
     const copy = (index) => {
       // Get the text field
-      var copyText = document.getElementById(index + "mid");
+      var copyText = document.getElementById(index);
     
       // Select the text field
       copyText.select();
@@ -467,7 +467,7 @@ const CustomerTable = ({ update, month, office }) => {
 
                          
                             <TableCell>
-                              <button style={{textDecoration:"underline"}} id={index + "mid"} onClick={() => copy(index + "mid")}> {singleCustomer.merchant_id}</button>
+                              <a style={{textDecoration:"underline"}} id={index + "mid"} onClick={() => copy(index + "mid")}> {singleCustomer.merchant_id}</a>
                               </TableCell>
                             <TableCell>{join}</TableCell>
 
