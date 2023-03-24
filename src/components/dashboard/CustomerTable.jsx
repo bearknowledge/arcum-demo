@@ -237,6 +237,11 @@ const CustomerTable = ({ update, month, office }) => {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - merchants.length) : 0;
 
+    const setHighlight = (index) => {
+      document.getElementById(index).setAttribute("style","background-color:gray")
+
+    }
+
   return (
     <>
       {loading ? (
@@ -429,8 +434,12 @@ const CustomerTable = ({ update, month, office }) => {
                         const day = "01";
                         const join = [year, fetchMonth].join("-");
                         return (
-                          <TableRow hover key={singleCustomer.merchant_id}>
-                            {/* {singleCustomer.contacted === true ?
+                          <TableRow hover key={singleCustomer.merchant_id} id={index}>
+
+                            
+                            {/* @dev use something like this for checkbox to show contacted
+                            
+                            {singleCustomer.contacted === true ?
 
                               <TableCell align="center" padding="checkbox" >
                               <input type="checkbox" id={index.toString}
@@ -470,8 +479,7 @@ const CustomerTable = ({ update, month, office }) => {
                                 : singleCustomer?.reason?.toUpperCase()}
                             </TableCell>
                             <TableCell>
-                              {singleCustomer.suggested.charAt(0).toUpperCase()
-  + singleCustomer.suggested.slice(1)}
+                              {singleCustomer.suggested.toUpperCase()}
                             </TableCell>
                             <TableCell>
                               <FormControl
@@ -483,32 +491,34 @@ const CustomerTable = ({ update, month, office }) => {
                                   labelId="action-label"
                                   id="action-tabs"
                                   // value={riskFilter}
-                                  // onChange={(e) => setRiskFilter(e.target.value)}
+                                   onChange={() => setHighlight(index)}
                                   label="Action"
                                 >
                                   <MenuItem value="">
                                     <em>None</em>
                                   </MenuItem>
-                                  <MenuItem value={"Email"}>Email</MenuItem>
-                                  <MenuItem value={"Call"}>Call</MenuItem>
+                                  <MenuItem value={"Email"}>EMAIL</MenuItem>
+                                  <MenuItem value={"Call"}>CALL</MenuItem>
                                   <MenuItem value={"Send_Agent"}>
-                                    Send Agent
+                                    SEND AGENT
                                   </MenuItem>
-                                  <MenuItem value={"New_POS"}>
-                                    {" "}
-                                    New POS
+                                  <MenuItem value={"New_Pos"}>
+                                   NEW POS
                                   </MenuItem>
-                                  <MenuItem value={"Lower_rate"}>
-                                    Lower rate
+                                  <MenuItem value={"MCA/Loan"}>
+                                   MCA/LOAN
+                                  </MenuItem>
+                                  <MenuItem value={"Lower_Rate"}>
+                                    LOWER RATE
                                   </MenuItem>
                                   <MenuItem value={"Surcharge/CD"}>
-                                    Surcharge/CD
+                                    SURCHARGE/CD
                                   </MenuItem>
-                                  <MenuItem value={"CB_mitigation"}>
-                                    CB mitigation
+                                  <MenuItem value={"CB_Mitigation"}>
+                                    CB MITIGATION
                                   </MenuItem>
                                   <MenuItem value={"Other"}>
-                                    Other (input action)
+                                   OTHER
                                   </MenuItem>
                                 </Select>
                               </FormControl>
