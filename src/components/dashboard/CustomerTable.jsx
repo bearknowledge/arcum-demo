@@ -242,19 +242,13 @@ const CustomerTable = ({ update, month, office }) => {
 
     }
 
-    const copy = (index) => {
-      // Get the text field
-      var copyText = document.getElementById(index);
-    
-      // Select the text field
-      copyText.select();
-      copyText.setSelectionRange(0, 99999); // For mobile devices
-    
-       // Copy the text inside the text field
-      navigator.clipboard.writeText(copyText.value);
-    
-      // Alert the copied text
-      alert("Copied the text: " + copyText.value);
+    const copy = (id) => {
+       const elm = document.getElementById(id)
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(elm).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
     }
 
   return (
@@ -467,7 +461,8 @@ const CustomerTable = ({ update, month, office }) => {
 
                          
                             <TableCell>
-                              <button style={{textDecoration:"underline", backgroundColor:"transparent", padding:"0px"}} id={index + "mid"} onClick={() => copy(index + "mid")}> {singleCustomer.merchant_id}</button>
+                              <a style={{textDecoration:"underline"}} id={index + "mid"} onClick={() => copy(index + "mid")}> {singleCustomer.merchant_id}</a>
+                              {console.log(index + "mid")}
                               </TableCell>
                             <TableCell>{join}</TableCell>
 
