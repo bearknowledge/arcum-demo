@@ -248,7 +248,6 @@ const CustomerTable = ({ update, month, office }) => {
         $temp.val($('#' + index).text()).select();
         document.execCommand("copy");
         $temp.remove();
-        return false;
     }
 
   return (
@@ -461,7 +460,7 @@ const CustomerTable = ({ update, month, office }) => {
 
                          
                             <TableCell>
-                             <a href="www.any-website.com" onClick={() => copy(index + "mid")}  style={{textDecoration:"underline", cursor:"copy"}} id={index + "mid"}> {singleCustomer.merchant_id}</a>
+                             <a href="www.any-website.com" onClick={() => {copy(index + "mid"); return false}}  style={{textDecoration:"underline", cursor:"copy"}} id={index + "mid"}> {singleCustomer.merchant_id}</a>
                             
                               </TableCell>
                             <TableCell>{join}</TableCell>
