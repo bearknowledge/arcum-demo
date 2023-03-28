@@ -236,7 +236,9 @@ const CustomerTable = ({ update, month, office }) => {
         `${process.env.NEXT_PUBLIC_API_URL}/export/${authUser.companyId}?termdate=${month}`,
         { method: "POST", responseType: "blob" }
       )
-      .then((res) => resolveAndDownloadBlob(res));
+      .then((res) => {
+        console.log(res)
+        resolveAndDownloadBlob(res)});
   };
 
   useEffect(() => {
