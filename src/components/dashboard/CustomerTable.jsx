@@ -172,6 +172,22 @@ const CustomerTable = ({ update, month, office }) => {
     }
   };
 
+
+  const copyContent = async (text, id) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      let copied = document.getElementById(id)
+      copied.innerText = "Copied!"
+      setTimeout(() => {
+        copied.innerText = text
+      },3000)
+      
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+
   const filterRows = useCallback(() => {
     let filteredCustomers = merchants;
 
@@ -460,7 +476,7 @@ const CustomerTable = ({ update, month, office }) => {
 
                          
                             <TableCell>
-                             <a href="www.any-website.com" onClick={() => {copy(index + "mid"); return false}}  style={{textDecoration:"underline", cursor:"copy"}} id={index + "mid"}> {singleCustomer.merchant_id}</a>
+                             <a href={void(0)} onClick={() => copyContent(singleCustomer.merchant_id, (index + "mid"))} style={{textDecoration:"underline", cursor:"pointer"}} id={index + "mid"}> {singleCustomer.merchant_id}</a>
                             
                               </TableCell>
                             <TableCell>{join}</TableCell>
