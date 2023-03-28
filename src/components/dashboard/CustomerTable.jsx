@@ -242,11 +242,10 @@ const CustomerTable = ({ update, month, office }) => {
 
     }
 
-    const copy = (id) => {
-       const elm = document.getElementById(id)
+    const copy = (index) => {
         var $temp = $("<input>");
         $("body").append($temp);
-        $temp.val($(elm).text()).select();
+        $temp.val($('#' + index).text()).select();
         document.execCommand("copy");
         $temp.remove();
     }
@@ -461,8 +460,8 @@ const CustomerTable = ({ update, month, office }) => {
 
                          
                             <TableCell>
-                              <a style={{textDecoration:"underline"}} id={index + "mid"} onClick={() => copy(index + "mid")}> {singleCustomer.merchant_id}</a>
-                              {console.log(index + "mid")}
+                              <a style={{textDecoration:"underline", cursor:"copy"}} id={index + "mid"} onClick={() => copy(index + "mid")}> {singleCustomer.merchant_id}</a>
+                            
                               </TableCell>
                             <TableCell>{join}</TableCell>
 
